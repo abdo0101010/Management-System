@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="crud">
+        <div class="header">
+            <h1>cruds</h1>
+            <p>Management system </p>
+        </div>
+        <div class="input">
+            <input type="text"  id="title" placeholder="title">
+            <div class="count">
+                <input onkeyup="totall()" type="number" name="" id="price" placeholder="price">
+                <input onkeyup="totall()" type="number" name="" id="tax" placeholder="tax">
+                <input onkeyup="totall()" type="number" name="" id="ads" placeholder="ads">
+                <input onkeyup="totall()" type="number" name="" id="discount" placeholder="discount ">
+                <small  id="total"></small>
+            </div>
+            <input type="number" id="count" placeholder="count">
+            <input type="number" id="getogery" placeholder="getogery">
+            <button id="create">Create</button>
+        </div>
+        <div class="output">
+            <input type="search" name="" id="search" placeholder="search">
+            <div class="btn">
+                <button id="sgetogery">Search by getogery</button>
+                <button id="stitle" >Search by title</button>
+            </div>
+            <div id="btndeleteall">
+
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>title</td>
+                        <td>price</td>
+                        <td>taxs</td>
+                        <td>Ads</td>
+                        <td>Discount</td>
+                        <td>total</td>
+                        <td>gategroy</td>
+                        <td>update</td>
+                        <td>Delete</td>
+                    </tr>
+                    </thead>
+                <tbody id="tbody">
+                    
+                    
+                </tbody>
+
+               
+            </table>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
