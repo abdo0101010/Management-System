@@ -7,16 +7,14 @@ let total = document.getElementById("total");
 let count = document.getElementById("count");
 let getogery = document.getElementById("getogery");
 let Create = document.getElementById("create");
-let mod='create';
+let search = document.getElementById("search");
+let mod = "create";
 let temp;
-console.log(title, price, tax, ads, discount, total, count, getogery);
-//effect total 
 function totall() {
   if (price != "") {
     let tot = +price.value + +tax.value + +ads.value - +discount.value;
     total.innerHTML = tot;
     total.style.background = "green";
-    console.log(tot);
   } else {
     total.innerHTML = "";
     total.style.background = "#F95454";
@@ -40,24 +38,22 @@ Create.onclick = function add() {
     count: count.value,
     getogery: getogery.value,
   };
-  if(mod=='create'){
-  if (item.count > 1) {
-    for (let i = 0; i < item.count; i++) {
+  if (mod == "create") {
+    if (item.count > 1) {
+      for (let i = 0; i < item.count; i++) {
+        prop.push(item);
+      }
+    } else {
       prop.push(item);
     }
   } else {
-    prop.push(item);
+    prop[temp] = item;
+    mod = "create";
+    count.style.display = "inline-block";
+    Create.innerHTML = "create";
+    totall();
   }
-}
-else{
-  prop[temp]=item;
-  mod="create";
-  count.style.display="inline-block"
-  Create.innerHTML="create";
-   totall();
-  
-}
-  
+
   localStorage.setItem("product", JSON.stringify(prop));
   console.log(prop);
   clear();
@@ -90,17 +86,15 @@ function show() {
                         <td><button onclick="update(${i})"  id="update">update</button></td>
                         <td><button onclick="remove(${i})" id="delete">delete</button></td>
                     </tr>`;
-    console.log(title);
   }
   document.getElementById("tbody").innerHTML = shows;
-  
-let btnDeleteAll = document.getElementById("btndeleteall");
- if (prop.length > 0) {
-   btnDeleteAll.innerHTML = `<button onclick="RemoveAll()" id="DeleteAll">DeleteAll (${prop.length})</button>`;
- } else {
-   btnDeleteAll.innerHTML = "";
- }
 
+  let btnDeleteAll = document.getElementById("btndeleteall");
+  if (prop.length > 0) {
+    btnDeleteAll.innerHTML = `<button onclick="RemoveAll()" id="DeleteAll">DeleteAll (${prop.length})</button>`;
+  } else {
+    btnDeleteAll.innerHTML = "";
+  }
 }
 show();
 function remove(select) {
@@ -108,21 +102,70 @@ function remove(select) {
   localStorage.product = JSON.stringify(prop);
   show();
 }
-function RemoveAll(){
+function RemoveAll() {
   localStorage.clear();
   prop.splice(0);
   show();
 }
 function update(index) {
   title.value = prop[index].title;
-  price.value=prop[index].price;
+  price.value = prop[index].price;
   tax.value = prop[index].tax;
-  ads.value=prop[index].ads;
-  discount.value=prop[index].discount;
+  ads.value = prop[index].ads;
+  discount.value = prop[index].discount;
   Create.innerHTML = "update";
-  count.style.display="none";
-   mod = "update";
+  count.style.display = "none";
+  mod = "update";
   temp = index;
+}
+let id = "";
+function getid(ids) {
+  id = ids;
+  console.log(search);
+  search.focus();
+  search.placeholder = "search " + id;
+  search.value='';
+  show();
+}
+function Search(value) {
+  console.log(value);
+  let show='';
+  if (id === "Bytitle") {
+    for (let i = 0; i < prop.length; i++) {
+      if (prop[i].title.toLowerCase().includes(value)) {
+        show += `         <tr>
+                        <td>${i + 1}</td>
+                        <td>${prop[i].title}</td>
+                        <td>${prop[i].price}</td>
+                        <td>${prop[i].tax}</td>
+                        <td>${prop[i].ads}</td>
+                        <td>${prop[i].discount}</td>
+                        <td>${prop[i].total}</td>
+                        <td>${prop[i].getogery}</td>
+                        <td><button onclick="update(${i})"  id="update">update</button></td>
+                        <td><button onclick="remove(${i})" id="delete">delete</button></td>
+                    </tr>`;
+      }
+    }
+  } else {
+    for (let i = 0; i < prop.length; i++) {
+      if (prop[i].getogery.toLowerCase().includes(value)) {
+        show += `         <tr>
+                        <td>${i + 1}</td>
+                        <td>${prop[i].title}</td>
+                        <td>${prop[i].price}</td>
+                        <td>${prop[i].tax}</td>
+                        <td>${prop[i].ads}</td>
+                        <td>${prop[i].discount}</td>
+                        <td>${prop[i].total}</td>
+                        <td>${prop[i].getogery}</td>
+                        <td><button onclick="update(${i})"  id="update">update</button></td>
+                        <td><button onclick="remove(${i})" id="delete">delete</button></td>
+                    </tr>`;
+      }
+    }
+  }
+  document.getElementById("tbody").innerHTML=show;
 }
 
 

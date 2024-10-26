@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
-
 <body>
     <div class="crud">
         <div class="header">
@@ -28,13 +27,12 @@
             <button id="create">Create</button>
         </div>
         <div class="output">
-            <input type="search" name="" id="search" placeholder="search">
+            <input type="search" name="" id="search" placeholder="search" onkeyup="Search(this.value)">
             <div class="btn">
-                <button id="sgetogery">Search by getogery</button>
-                <button id="stitle" >Search by title</button>
+                <button id="Bygetogery" onclick="getid(this.id)">Search by getogery</button>
+                <button id="Bytitle"  onclick="getid(this.id)">Search by title</button>
             </div>
             <div id="btndeleteall">
-
             </div>
             <table>
                 <thead>
@@ -52,11 +50,7 @@
                     </tr>
                     </thead>
                 <tbody id="tbody">
-                    
-                    
-                </tbody>
-
-               
+                </tbody>     
             </table>
         </div>
     </div>
